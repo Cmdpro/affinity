@@ -51,7 +51,7 @@ public class PotionContentsComponentMixin implements ExtendedPotionContentsCompo
     }
 
     @SuppressWarnings("InvalidInjectorMethodSignature")
-    @ModifyArg(method = "buildTooltip(Ljava/lang/Iterable;Ljava/util/function/Consumer;FF)V", at = @At(value = "INVOKE", target = "net/minecraft/text/Text.translatable(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/text/MutableText;", ordinal = 1), index = 1)
+    @Inject(method = "buildTooltip(Ljava/lang/Iterable;Ljava/util/function/Consumer;FF)V", at = @At(value = "INVOKE", target = "net/minecraft/text/Text.translatable(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/text/MutableText;", shift = At.Shift.AFTER))
     private static Object[] addLengthMultiplier(Object[] args, @Local(argsOnly = true, ordinal = 0) float durationMultiplier, @Local(argsOnly = true, ordinal = 1) float tickRate, @Local StatusEffectInstance effectInst) {
         if (!(args[1] instanceof MutableText text && text.getContent() instanceof PlainTextContent.Literal literal)) {
             return args;
